@@ -84,10 +84,25 @@ class SimulationApp(QMainWindow):
             self.app_path_input.setText(file_path)
 
     def run_simulation(self):
+        """Validate inputs and run the simulation executable."""
+
+        # Get values from all three input fields
         app_path = self.app_path_input.text().strip()
         start_time_text = self.start_time_input.text().strip()
         stop_time_text = self.stop_time_input.text().strip()
 
+        # condition to check nothing is empty
+        if not app_path:
+            QMessageBox.warning(self, "Missing Input", "Please select a simulation executable.")
+            return
+
+        if not start_time_text:
+            QMessageBox.warning(self, "Missing Input", "Please enter a start time.")
+            return
+
+        if not stop_time_text:
+            QMessageBox.warning(self, "Missing Input", "Please enter a stop time.")
+            return
         command = [
             app_path,
             f"-override=startTime={start_time_text},stopTime={stop_time_text}"
