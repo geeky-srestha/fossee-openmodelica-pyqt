@@ -78,7 +78,7 @@ class SimulationApp(QMainWindow):
             self,
             "Select Simulation Executable",
             "",
-            "Executable Files (*.exe)"
+            "Executable Files (*.exe *.bat)"
         )
         if file_path:
             self.app_path_input.setText(file_path)
