@@ -39,6 +39,27 @@ class SimulationApp(QMainWindow):
         browse_button = QPushButton("Browse")
         browse_button.clicked.connect(self.browse_executable)
 
+        app_row = QHBoxLayout()
+        app_row.addWidget(self.app_path_input)
+        app_row.addWidget(browse_button)
+
+        # Input Field 2: Start Time
+        start_label = QLabel("Start Time (integer, >= 0):")
+        self.start_time_input = QLineEdit()
+        self.start_time_input.setPlaceholderText("e.g. 0")
+
+        # Input Field 3: Stop Time
+        stop_label = QLabel("Stop Time (integer, < 5):")
+        self.stop_time_input = QLineEdit()
+        self.stop_time_input.setPlaceholderText("e.g. 3")
+
+        main_layout.addWidget(app_label)
+        main_layout.addLayout(app_row)
+        main_layout.addWidget(start_label)
+        main_layout.addWidget(self.start_time_input)
+        main_layout.addWidget(stop_label)
+        main_layout.addWidget(self.stop_time_input)
+
     def browse_executable(self):
         """Open file dialog to select the simulation executable."""
         file_path, _ = QFileDialog.getOpenFileName(
