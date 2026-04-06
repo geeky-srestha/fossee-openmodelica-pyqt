@@ -116,6 +116,16 @@ class SimulationApp(QMainWindow):
             QMessageBox.warning(self, "Invalid Input", "Stop time must be an integer.")
             return
 
+         # Check the condition: 0 <= start < stop < 5
+        if not (0 <= start_time < stop_time < 5):
+            QMessageBox.warning(
+                self,
+                "Invalid Input",
+                "Times must satisfy: 0 <= Start Time < Stop Time < 5"
+            )
+            return
+
+        # Build the command and run it
         command = [
             app_path,
             f"-override=startTime={start_time},stopTime={stop_time}"
