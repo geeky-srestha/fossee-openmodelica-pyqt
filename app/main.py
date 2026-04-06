@@ -53,12 +53,20 @@ class SimulationApp(QMainWindow):
         self.stop_time_input = QLineEdit()
         self.stop_time_input.setPlaceholderText("e.g. 3")
 
+        # Run Button
+        self.run_button = QPushButton("Run Simulation")
+        self.run_button.setFixedHeight(40)
+
+        # added everything to main layout
         main_layout.addWidget(app_label)
         main_layout.addLayout(app_row)
         main_layout.addWidget(start_label)
         main_layout.addWidget(self.start_time_input)
         main_layout.addWidget(stop_label)
         main_layout.addWidget(self.stop_time_input)
+        main_layout.addSpacing(10)
+        main_layout.addWidget(self.run_button)
+
 
     def browse_executable(self):
         """Open file dialog to select the simulation executable."""
