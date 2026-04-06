@@ -103,9 +103,22 @@ class SimulationApp(QMainWindow):
         if not stop_time_text:
             QMessageBox.warning(self, "Missing Input", "Please enter a stop time.")
             return
+        # Check that start and stop are integers
+        try:
+            start_time = int(start_time_text)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid Input", "Start time must be an integer.")
+            return
+
+        try:
+            stop_time = int(stop_time_text)
+        except ValueError:
+            QMessageBox.warning(self, "Invalid Input", "Stop time must be an integer.")
+            return
+
         command = [
             app_path,
-            f"-override=startTime={start_time_text},stopTime={stop_time_text}"
+            f"-override=startTime={start_time},stopTime={stop_time}"
         ]
 
         self.run_button.setEnabled(False)
