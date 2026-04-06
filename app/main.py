@@ -1,4 +1,7 @@
 import sys
+import os
+import subprocess
+from unittest import result
 from PyQt6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -56,6 +59,7 @@ class SimulationApp(QMainWindow):
         # Run Button
         self.run_button = QPushButton("Run Simulation")
         self.run_button.setFixedHeight(40)
+        self.run_button.clicked.connect(self.run_simulation)
 
         # added everything to main layout
         main_layout.addWidget(app_label)
@@ -78,6 +82,42 @@ class SimulationApp(QMainWindow):
         )
         if file_path:
             self.app_path_input.setText(file_path)
+
+    def run_simulation(self):
+        app_path = self.app_path_input.text().strip()
+        start_time_text = self.start_time_input.text().strip()
+        stop_time_text = self.stop_time_input.text().strip()
+
+        command = [
+            app_path,
+            f"-override=startTime={start_time_text},stopTime={stop_time_text}"
+        ]
+
+        self.run_button.setEnabled(False)
+        self.run_button.setText("Running...")
+
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            cwd=os.path.dirname(app_path)
+        )
+
+        if result.returncode == 0:
+            QMessageBox.information(
+                self,
+                "Success",
+                "Simulation completed successfully!"
+            )
+        else:
+            QMessageBox.warning(
+                self,
+                "Simulation Error",
+                f"Simulation finished with errors:\n{result.stderr}"
+            )
+
+        self.run_button.setEnabled(True)
+        self.run_button.setText("Run Simulation")
 
 def main():
     app = QApplication(sys.argv)
