@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (
     QMessageBox
 )
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon, QFont
 
 
 class SimulationApp(QMainWindow):
@@ -24,6 +25,7 @@ class SimulationApp(QMainWindow):
         super().__init__()
         self.setWindowTitle("OpenModelica Simulation Launcher")
         self.setMinimumWidth(500)
+        self.setAcceptDrops(True)
         self.setup_ui()
 
     def setup_ui(self):
@@ -39,7 +41,8 @@ class SimulationApp(QMainWindow):
         app_label = QLabel("Simulation Executable:")
         self.app_path_input = QLineEdit()
         self.app_path_input.setPlaceholderText("Select the TwoConnectedTanks executable...")
-        browse_button = QPushButton("Browse")
+        browse_button = QPushButton("  Browse")
+        browse_button.setIcon(QIcon.fromTheme("folder-open"))
         browse_button.clicked.connect(self.browse_executable)
 
         app_row = QHBoxLayout()
@@ -57,7 +60,8 @@ class SimulationApp(QMainWindow):
         self.stop_time_input.setPlaceholderText("e.g. 3")
 
         # Run Button
-        self.run_button = QPushButton("Run Simulation")
+        self.run_button = QPushButton("  Run Simulation")
+        self.run_button.setIcon(QIcon.fromTheme("media-playback-start"))
         self.run_button.setFixedHeight(40)
         self.run_button.clicked.connect(self.run_simulation)
 
@@ -161,6 +165,20 @@ class SimulationApp(QMainWindow):
         finally:
             self.run_button.setEnabled(True)
             self.run_button.setText("Run Simulation")
+
+    #drag and drop functionality to allow users to drag the executable file into the application
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        if event.mimeData().hasUrls():
+            for url in event.mimeData().urls():
+                file_path = url.toLocalFile()
+                if file_path.endswith(".exe") or file_path.endswith(".bat"):
+                    self.app_path_input.setText(file_path)
+                    break
+
 
 def main():
     app = QApplication(sys.argv)
