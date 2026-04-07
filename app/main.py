@@ -131,31 +131,36 @@ class SimulationApp(QMainWindow):
             f"-override=startTime={start_time},stopTime={stop_time}"
         ]
 
-        self.run_button.setEnabled(False)
-        self.run_button.setText("Running...")
+        try:
+            self.run_button.setEnabled(False)
+            self.run_button.setText("Running...")
 
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            cwd=os.path.dirname(app_path)
-        )
-
-        if result.returncode == 0:
-            QMessageBox.information(
-                self,
-                "Success",
-                "Simulation completed successfully!"
-            )
-        else:
-            QMessageBox.warning(
-                self,
-                "Simulation Error",
-                f"Simulation finished with errors:\n{result.stderr}"
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                cwd=os.path.dirname(app_path)
             )
 
-        self.run_button.setEnabled(True)
-        self.run_button.setText("Run Simulation")
+            if result.returncode == 0:
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    "Simulation completed successfully!"
+                )
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Simulation Error",
+                    f"Simulation finished with errors:\n{result.stderr}"
+                )
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to run simulation:\n{str(e)}")
+
+        finally:
+            self.run_button.setEnabled(True)
+            self.run_button.setText("Run Simulation")
 
 def main():
     app = QApplication(sys.argv)
