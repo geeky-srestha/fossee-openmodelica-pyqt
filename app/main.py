@@ -24,6 +24,7 @@ class SimulationApp(QMainWindow):
         super().__init__()
         self.setWindowTitle("OpenModelica Simulation Launcher")
         self.setMinimumWidth(500)
+        self.setAcceptDrops(True)
         self.setup_ui()
 
     def setup_ui(self):
@@ -161,6 +162,20 @@ class SimulationApp(QMainWindow):
         finally:
             self.run_button.setEnabled(True)
             self.run_button.setText("Run Simulation")
+
+    #drag and drop functionality to allow users to drag the executable file into the application
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        if event.mimeData().hasUrls():
+            for url in event.mimeData().urls():
+                file_path = url.toLocalFile()
+                if file_path.endswith(".exe") or file_path.endswith(".bat"):
+                    self.app_path_input.setText(file_path)
+                    break
+
 
 def main():
     app = QApplication(sys.argv)
