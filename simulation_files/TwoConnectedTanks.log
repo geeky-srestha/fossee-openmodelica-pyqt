@@ -1,3 +1,26 @@
-<p>C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks/TwoConnectedTanks.exe -port=63762 -logFormat=xmltcp -startTime=0 -stopTime=1 -stepSize=0.002 -tolerance=1e-06 -s=dassl -outputFormat=mat -variableFilter=.* -r=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks/TwoConnectedTanks_res.mat -w -lv=LOG_STDOUT,LOG_ASSERT,LOG_STATS -inputPath=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks -outputPath=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks</p>
-LOG_ASSERT		| debug	 | <p>division by zero at time 0, (a=10) / (b=0), where divisor b expression is: tank2.Q1</p>
-LOG_ASSERT		| info	 | <p>simulation terminated by an assertion at initialization</p>
+<p>C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks/TwoConnectedTanks.exe -port=52798 -logFormat=xmltcp -startTime=0 -stopTime=1 -stepSize=0.002 -tolerance=1e-06 -s=dassl -outputFormat=csv -variableFilter=.* -r=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks/TwoConnectedTanks_res.csv -w -lv=LOG_STDOUT,LOG_ASSERT,LOG_STATS -inputPath=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks -outputPath=C:/Users/U.BHANUPRAKASH REDDY/AppData/Local/Temp/OpenModelica/OMEdit/NonInteractingTanks.TwoConnectedTanks</p>
+LOG_SUCCESS		| info	 | <p>The initialization finished successfully without homotopy method.</p>
+LOG_STATS		| info	 | <p>### STATISTICS ###</p>
+|		| |	 | | <p>timer</p>
+|		| |	 | | | <p>   0.0006998s          reading init.xml</p>
+|		| |	 | | | <p>   0.0005381s          reading info.xml</p>
+|		| |	 | | | <p>   0.0003292s [  3.7%] pre-initialization</p>
+|		| |	 | | | <p>   0.0004993s [  5.6%] initialization</p>
+|		| |	 | | | <p>     8.4e-06s [  0.1%] steps</p>
+|		| |	 | | | <p>   0.0008242s [  9.2%] solver (excl. callbacks)</p>
+|		| |	 | | | <p>   0.0013125s [ 14.6%] creating output-file</p>
+|		| |	 | | | <p>    6.97e-05s [  0.8%] event-handling</p>
+|		| |	 | | | <p>    0.000137s [  1.5%] overhead</p>
+|		| |	 | | | <p>   0.0058141s [ 64.6%] simulation</p>
+|		| |	 | | | <p>   0.0089944s [100.0%] total</p>
+|		| |	 | | <p>events</p>
+|		| |	 | | | <p>    0 state events</p>
+|		| |	 | | | <p>    0 time events</p>
+|		| |	 | | <p>solver: dassl</p>
+|		| |	 | | | <p>   22 steps taken</p>
+|		| |	 | | | <p>   22 calls of functionODE</p>
+|		| |	 | | | <p>   21 evaluations of jacobian</p>
+|		| |	 | | | <p>    0 error test failures</p>
+|		| |	 | | | <p>    0 convergence test failures</p>
+|		| |	 | | | <p>6.9e-06s time of jacobian evaluation</p>
+LOG_SUCCESS		| info	 | <p>The simulation finished successfully.</p>
