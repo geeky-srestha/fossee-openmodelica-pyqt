@@ -72,6 +72,8 @@ class SimulationApp(QMainWindow):
         main_layout.addWidget(self.start_time_input)
         main_layout.addWidget(stop_label)
         main_layout.addWidget(self.stop_time_input)
+        self.status_label = QLabel("Status: Ready")
+        main_layout.addWidget(self.status_label)
         main_layout.addSpacing(10)
         main_layout.addWidget(self.run_button)
 
@@ -136,6 +138,7 @@ class SimulationApp(QMainWindow):
         ]
 
         try:
+            self.status_label.setText("Status: Running...")
             self.run_button.setEnabled(False)
             self.run_button.setText("Running...")
 
@@ -147,12 +150,14 @@ class SimulationApp(QMainWindow):
             )
 
             if result.returncode == 0:
+                self.status_label.setText("Status: Completed ✅")
                 QMessageBox.information(
                     self,
                     "Success",
                     "Simulation completed successfully!"
                 )
             else:
+                self.status_label.setText("Status: Error ❌")
                 QMessageBox.warning(
                     self,
                     "Simulation Error",
