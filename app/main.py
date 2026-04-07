@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (
     QMessageBox
 )
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon, QFont
 
 
 class SimulationApp(QMainWindow):
@@ -41,6 +42,7 @@ class SimulationApp(QMainWindow):
         self.app_path_input = QLineEdit()
         self.app_path_input.setPlaceholderText("Select the TwoConnectedTanks executable...")
         browse_button = QPushButton("Browse")
+        browse_button.setIcon(QIcon.fromTheme("folder-open"))
         browse_button.clicked.connect(self.browse_executable)
 
         app_row = QHBoxLayout()
@@ -59,6 +61,7 @@ class SimulationApp(QMainWindow):
 
         # Run Button
         self.run_button = QPushButton("Run Simulation")
+        self.run_button.setIcon(QIcon.fromTheme("media-playback-start"))
         self.run_button.setFixedHeight(40)
         self.run_button.clicked.connect(self.run_simulation)
 
