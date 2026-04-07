@@ -41,7 +41,7 @@ class SimulationApp(QMainWindow):
         app_label = QLabel("Simulation Executable:")
         self.app_path_input = QLineEdit()
         self.app_path_input.setPlaceholderText("Select the TwoConnectedTanks executable...")
-        browse_button = QPushButton("Browse")
+        browse_button = QPushButton("  Browse")
         browse_button.setIcon(QIcon.fromTheme("folder-open"))
         browse_button.clicked.connect(self.browse_executable)
 
@@ -60,7 +60,7 @@ class SimulationApp(QMainWindow):
         self.stop_time_input.setPlaceholderText("e.g. 3")
 
         # Run Button
-        self.run_button = QPushButton("Run Simulation")
+        self.run_button = QPushButton("  Run Simulation")
         self.run_button.setIcon(QIcon.fromTheme("media-playback-start"))
         self.run_button.setFixedHeight(40)
         self.run_button.clicked.connect(self.run_simulation)
