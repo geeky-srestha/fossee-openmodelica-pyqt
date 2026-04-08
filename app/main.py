@@ -117,24 +117,28 @@ class SimulationApp(QMainWindow):
         spacer.setFixedWidth(10)
         toolbar.addWidget(spacer)
         open_action.triggered.connect(self.browse_executable)
+        open_action.setShortcut("Ctrl+O")
 
         run_action = toolbar.addAction(QIcon("icons/run.png"), "Run")
         spacer = QWidget()
         spacer.setFixedWidth(10)
         toolbar.addWidget(spacer)
         run_action.triggered.connect(self.run_simulation)
+        run_action.setShortcut("Ctrl+R")
         
         exit_action = toolbar.addAction(QIcon("icons/exit.png"), "Exit")
         spacer = QWidget()
         spacer.setFixedWidth(10)
         toolbar.addWidget(spacer)
         exit_action.triggered.connect(self.close)
+        exit_action.setShortcut("Ctrl+Q")
         
         info_action = toolbar.addAction(QIcon(os.path.join("icons", "info.png")), "About")
         spacer = QWidget()
         spacer.setFixedWidth(10)
         toolbar.addWidget(spacer)
         info_action.triggered.connect(self.show_about)
+        info_action.setShortcut("Ctrl+I")
 
     def show_about(self):
         QMessageBox.information(
@@ -143,7 +147,8 @@ class SimulationApp(QMainWindow):
           "OpenModelica Simulation Launcher\n\n"
           "Runs OpenModelica models with custom start/stop time.\n"
           "Built using PyQt6 by Srestha Kumar"
-    )
+        )
+    
 
     def browse_executable(self):
         """Open file dialog to select the simulation executable."""
