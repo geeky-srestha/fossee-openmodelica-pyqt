@@ -4,6 +4,7 @@ import subprocess
 from unittest import result
 from PyQt6.QtWidgets import (
     QApplication,
+    QGroupBox,
     QMainWindow,
     QWidget,
     QVBoxLayout,
@@ -25,8 +26,10 @@ class SimulationApp(QMainWindow):
         super().__init__()
         self.setWindowTitle("OpenModelica Simulation Launcher")
         self.setMinimumWidth(500)
+        self.setMinimumHeight(500)
         self.setAcceptDrops(True)
         self.setup_ui()
+        # self.apply_styles()
 
     def setup_ui(self):
         """Set up all UI components."""
@@ -35,13 +38,31 @@ class SimulationApp(QMainWindow):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         main_layout = QVBoxLayout()
+        main_layout.setSpacing(10)
+        main_layout.setContentsMargins(20, 20, 20, 20)
         central_widget.setLayout(main_layout)
+
+        # Title
+        title_label = QLabel("OpenModelica Simulation Launcher")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_font = QFont()
+        title_font.setPointSize(14)
+        title_font.setBold(True)
+        title_label.setFont(title_font)
+        main_layout.addWidget(title_label)
+
+        # Input Group Box
+        input_group = QGroupBox("Simulation Parameters")
+        input_layout = QVBoxLayout()
+        input_layout.setSpacing(8)
+        input_group.setLayout(input_layout)
 
         # Input Field 1: Application path
         app_label = QLabel("Simulation Executable:")
         self.app_path_input = QLineEdit()
         self.app_path_input.setPlaceholderText("Select the TwoConnectedTanks executable...")
         browse_button = QPushButton("  Browse")
+        browse_button.setFixedWidth(80)
         browse_button.setIcon(QIcon.fromTheme("folder-open"))
         browse_button.clicked.connect(self.browse_executable)
 
@@ -53,11 +74,14 @@ class SimulationApp(QMainWindow):
         start_label = QLabel("Start Time (integer, >= 0):")
         self.start_time_input = QLineEdit()
         self.start_time_input.setPlaceholderText("e.g. 0")
+        browse_button.setFixedWidth(80)
+        self.start_time_input.setFixedWidth(100)
 
         # Input Field 3: Stop Time
         stop_label = QLabel("Stop Time (integer, < 5):")
         self.stop_time_input = QLineEdit()
         self.stop_time_input.setPlaceholderText("e.g. 3")
+        self.stop_time_input.setFixedWidth(100)
 
         # Run Button
         self.run_button = QPushButton("  Run Simulation")
