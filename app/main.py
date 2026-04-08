@@ -166,6 +166,11 @@ class SimulationApp(QMainWindow):
             )
             return
 
+        if app_path.endswith(".exe"):
+           bat_path = app_path.replace(".exe", ".bat")
+           if os.path.exists(bat_path):
+              app_path = bat_path
+
         # Build the command and run it by passing the start and stop time as arguments to the executable
         command = [
            app_path,
@@ -181,7 +186,7 @@ class SimulationApp(QMainWindow):
             self.run_button.setText("Running...")
 
             result = subprocess.run(
-                command,
+                command,  #command running the executable with the arguments
                 capture_output=True,
                 text=True,
                 cwd=os.path.dirname(app_path)
