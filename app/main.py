@@ -128,6 +128,8 @@ class SimulationApp(QMainWindow):
         app_path = self.app_path_input.text().strip()
         start_time_text = self.start_time_input.text().strip()
         stop_time_text = self.stop_time_input.text().strip()
+        step_size = (int(stop_time_text) - int(start_time_text)) / 500
+
 
         # condition to check nothing is empty
         if not app_path:
@@ -167,8 +169,10 @@ class SimulationApp(QMainWindow):
         command = [
            app_path,
            f"-startTime={start_time}",
-           f"-stopTime={stop_time}"
-      ]
+           f"-stopTime={stop_time}",
+           f"-stepSize={step_size}",
+           "-lv=LOG_STATS"
+        ]
 
         try:
             self.status_label.setText("Status: Running...")
