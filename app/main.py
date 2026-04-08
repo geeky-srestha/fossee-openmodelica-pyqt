@@ -118,6 +118,7 @@ class SimulationApp(QMainWindow):
         toolbar.addWidget(spacer)
         open_action.triggered.connect(self.browse_executable)
         open_action.setShortcut("Ctrl+O")
+        open_action.setToolTip("Open executable (Ctrl+O)")
 
         run_action = toolbar.addAction(QIcon("icons/run.png"), "Run")
         spacer = QWidget()
@@ -125,13 +126,15 @@ class SimulationApp(QMainWindow):
         toolbar.addWidget(spacer)
         run_action.triggered.connect(self.run_simulation)
         run_action.setShortcut("Ctrl+R")
-        
+        run_action.setToolTip("Run simulation (Ctrl+R)")
+
         exit_action = toolbar.addAction(QIcon("icons/exit.png"), "Exit")
         spacer = QWidget()
         spacer.setFixedWidth(10)
         toolbar.addWidget(spacer)
         exit_action.triggered.connect(self.close)
         exit_action.setShortcut("Ctrl+Q")
+        exit_action.setToolTip("Exit application (Ctrl+Q)")
         
         info_action = toolbar.addAction(QIcon(os.path.join("icons", "info.png")), "About")
         spacer = QWidget()
@@ -139,6 +142,7 @@ class SimulationApp(QMainWindow):
         toolbar.addWidget(spacer)
         info_action.triggered.connect(self.show_about)
         info_action.setShortcut("Ctrl+I")
+        info_action.setToolTip("About (Ctrl+I)")
 
     def show_about(self):
         QMessageBox.information(
