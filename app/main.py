@@ -29,7 +29,7 @@ class SimulationApp(QMainWindow):
         self.setMinimumHeight(500)
         self.setAcceptDrops(True)
         self.setup_ui()
-        # self.apply_styles()
+        self.create_toolbar()
 
     def setup_ui(self):
         """Set up all UI components."""
@@ -109,6 +109,41 @@ class SimulationApp(QMainWindow):
 
         main_layout.addWidget(self.run_button)
 
+    def create_toolbar(self):
+        toolbar = self.addToolBar("Main Toolbar")
+
+        open_action = toolbar.addAction(QIcon("icons/open.png"), "Open")
+        spacer = QWidget()
+        spacer.setFixedWidth(10)
+        toolbar.addWidget(spacer)
+        open_action.triggered.connect(self.browse_executable)
+
+        run_action = toolbar.addAction(QIcon("icons/run.png"), "Run")
+        spacer = QWidget()
+        spacer.setFixedWidth(10)
+        toolbar.addWidget(spacer)
+        run_action.triggered.connect(self.run_simulation)
+        
+        exit_action = toolbar.addAction(QIcon("icons/exit.png"), "Exit")
+        spacer = QWidget()
+        spacer.setFixedWidth(10)
+        toolbar.addWidget(spacer)
+        exit_action.triggered.connect(self.close)
+        
+        info_action = toolbar.addAction(QIcon(os.path.join("icons", "info.png")), "About")
+        spacer = QWidget()
+        spacer.setFixedWidth(10)
+        toolbar.addWidget(spacer)
+        info_action.triggered.connect(self.show_about)
+
+    def show_about(self):
+        QMessageBox.information(
+          self,
+          "About",
+          "OpenModelica Simulation Launcher\n\n"
+          "Runs OpenModelica models with custom start/stop time.\n"
+          "Built using PyQt6 by Srestha Kumar"
+    )
 
     def browse_executable(self):
         """Open file dialog to select the simulation executable."""
