@@ -12,7 +12,8 @@ from PyQt6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QFileDialog,
-    QMessageBox
+    QMessageBox,
+    QTextEdit
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon, QFont
@@ -99,6 +100,13 @@ class SimulationApp(QMainWindow):
         main_layout.addWidget(input_group)
         self.status_label = QLabel("Status: Ready")
         main_layout.addWidget(self.status_label)
+
+        # Output box to display simulation logs
+        self.output_box = QTextEdit()
+        self.output_box.setReadOnly(True)
+        self.output_box.setPlaceholderText("Simulation output will appear here...")
+        main_layout.addWidget(self.output_box)
+
         main_layout.addWidget(self.run_button)
 
 
@@ -157,9 +165,10 @@ class SimulationApp(QMainWindow):
 
         # Build the command and run it by passing the start and stop time as arguments to the executable
         command = [
-            app_path,
-            f"-override=startTime={start_time},stopTime={stop_time}"
-        ]
+           app_path,
+           f"-startTime={start_time}",
+           f"-stopTime={stop_time}"
+      ]
 
         try:
             self.status_label.setText("Status: Running...")
@@ -172,6 +181,9 @@ class SimulationApp(QMainWindow):
                 text=True,
                 cwd=os.path.dirname(app_path)
             )
+            # Display stdout in output box
+            if result.stdout:
+                self.output_box.setText(result.stdout)
 
             if result.returncode == 0:
                 self.status_label.setText("Status: Completed ✅")
@@ -182,6 +194,8 @@ class SimulationApp(QMainWindow):
                 )
             else:
                 self.status_label.setText("Status: Error ❌")
+                if result.stderr:
+                    self.output_box.setText(result.stderr)
                 QMessageBox.warning(
                     self,
                     "Simulation Error",
