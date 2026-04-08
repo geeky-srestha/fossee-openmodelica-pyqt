@@ -25,6 +25,7 @@ class SimulationApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("OpenModelica Simulation Launcher")
+        self.setWindowIcon(QIcon("icons/app_icon.png"))
         self.setMinimumWidth(500)
         self.setMinimumHeight(500)
         self.setAcceptDrops(True)
