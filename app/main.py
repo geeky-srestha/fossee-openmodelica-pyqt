@@ -1,7 +1,6 @@
 import sys
 import os
 import subprocess
-from unittest import result
 from PyQt6.QtWidgets import (
     QApplication,
     QGroupBox,
@@ -86,19 +85,21 @@ class SimulationApp(QMainWindow):
         # Run Button
         self.run_button = QPushButton("  Run Simulation")
         self.run_button.setIcon(QIcon.fromTheme("media-playback-start"))
-        self.run_button.setFixedHeight(40)
+        self.run_button.setFixedHeight(45)
         self.run_button.clicked.connect(self.run_simulation)
+        main_layout.addWidget(self.run_button)
 
         # added everything to main layout
-        main_layout.addWidget(app_label)
-        main_layout.addLayout(app_row)
-        main_layout.addWidget(start_label)
-        main_layout.addWidget(self.start_time_input)
-        main_layout.addWidget(stop_label)
-        main_layout.addWidget(self.stop_time_input)
+        input_layout.addWidget(app_label)
+        input_layout.addLayout(app_row)
+        input_layout.addWidget(start_label)
+        input_layout.addWidget(self.start_time_input)
+        input_layout.addWidget(stop_label)
+        input_layout.addWidget(self.stop_time_input)
+        main_layout.addSpacing(10)
+        main_layout.addWidget(input_group)
         self.status_label = QLabel("Status: Ready")
         main_layout.addWidget(self.status_label)
-        main_layout.addSpacing(10)
         main_layout.addWidget(self.run_button)
 
 
