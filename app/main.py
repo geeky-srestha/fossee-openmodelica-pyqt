@@ -16,7 +16,7 @@ from PyQt6.QtWidgets import (
     QTextEdit
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtGui import QIcon, QFont, QTextCursor
 
 
 class SimulationApp(QMainWindow):
@@ -125,6 +125,7 @@ class SimulationApp(QMainWindow):
         """Validate inputs and run the simulation executable."""
 
         # Get values from all three input fields
+        self.output_box.clear()
         app_path = self.app_path_input.text().strip()
         start_time_text = self.start_time_input.text().strip()
         stop_time_text = self.stop_time_input.text().strip()
@@ -188,6 +189,7 @@ class SimulationApp(QMainWindow):
             # Display stdout in output box
             if result.stdout:
                 self.output_box.setText(result.stdout)
+                self.output_box.moveCursor(QTextCursor.MoveOperation.End)
 
             if result.returncode == 0:
                 self.status_label.setText("Status: Completed ✅")
@@ -200,6 +202,7 @@ class SimulationApp(QMainWindow):
                 self.status_label.setText("Status: Error ❌")
                 if result.stderr:
                     self.output_box.setText(result.stderr)
+                    self.output_box.moveCursor(QTextCursor.MoveOperation.End)
                 QMessageBox.warning(
                     self,
                     "Simulation Error",
