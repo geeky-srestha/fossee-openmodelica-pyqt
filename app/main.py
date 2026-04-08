@@ -87,7 +87,6 @@ class SimulationApp(QMainWindow):
         self.run_button.setIcon(QIcon.fromTheme("media-playback-start"))
         self.run_button.setFixedHeight(45)
         self.run_button.clicked.connect(self.run_simulation)
-        main_layout.addWidget(self.run_button)
 
         # added everything to main layout
         input_layout.addWidget(app_label)
@@ -156,7 +155,7 @@ class SimulationApp(QMainWindow):
             )
             return
 
-        # Build the command and run it
+        # Build the command and run it by passing the start and stop time as arguments to the executable
         command = [
             app_path,
             f"-override=startTime={start_time},stopTime={stop_time}"
@@ -207,6 +206,7 @@ class SimulationApp(QMainWindow):
                 file_path = url.toLocalFile()
                 if file_path.endswith(".exe") or file_path.endswith(".bat"):
                     self.app_path_input.setText(file_path)
+                    self.status_label.setText(f"Status: Executable loaded via drag & drop ✅")
                     break
 
 
