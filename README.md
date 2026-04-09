@@ -49,19 +49,28 @@ The GUI abstracts away the command-line complexity and gives users an intuitive 
 ```
 fossee-openmodelica-pyqt/
 │
-├── app/                  # Main application source code
+├── app/                       # Main application source code
 │   ├── main.py
-│   ├── icons/                   # Toolbar and window icons
+│   ├── icons/                 # Toolbar and window icons
 │   │   ├── app_icon.png
 │   │   ├── open.png
 │   │   ├── run.png
 │   │   ├── exit.png
 │   │   └── info.png
-├── simulation_files/       # Compiled OpenModelica executable and dependencies
+├── simulation_files/          # Compiled OpenModelica executable and dependencies
 │   ├── TwoConnectedTanks.exe   (Windows) / TwoConnectedTanks (Linux)
 │   ├── TwoConnectedTanks.bat   (Windows launcher script, if applicable)
-│   └── ...                  # Other runtime libraries and model files
-├── requirements.txt         # Python dependencies
+│   └── ...                    # Other runtime libraries and model files
+├──screenshots/                #Screenshots of the app
+|  ├── idle.png
+│  ├── load.png
+│  ├── ready.png
+│  ├── invalid.png
+│  ├── success.png
+│  ├── successlog.png
+│  └── about.png    
+├── requirements.txt           # Python dependencies
+├── LICENSE                    #MIT LICENSE
 └── README.md
 ```
 
@@ -138,7 +147,45 @@ Any violation will trigger a descriptive warning dialog before execution.
 
 ## 📸 Screenshots
 
+### 1. Application on Launch
+![Idle State](screenshots/idle.png)
+> The app opens with all fields empty and **Status: Ready**. Placeholder text guides the user on what each field expects.
 
+---
+
+### 2. Executable Loaded via Drag & Drop
+![Executable Loaded](screenshots/load.png)
+> The simulation executable has been dragged and dropped directly onto the window. The status bar updates to **"Executable loaded via drag & drop ✅"**, confirming the file was accepted.
+
+---
+
+### 3. Ready to Run
+![Ready to Run](screenshots/ready.png)
+> All three fields are filled in — executable path, start time (`0`), and stop time (`2`). The app is ready to execute the simulation.
+
+---
+
+### 4. Input Validation Error
+![Validation Error](screenshots/invalid.png)
+> When an invalid time range is entered (e.g., stop time `6` which violates `stop < 5`), a warning dialog is shown with a clear message explaining the constraint.
+
+---
+
+### 5. Simulation Success Dialog
+![Success Dialog](screenshots/success.png)
+> After a successful run, a confirmation dialog appears. The **Run button is disabled** (showing "Running...") while execution is in progress, and the status label shows **Completed ✅**.
+
+---
+
+### 6. Full Simulation Output Log
+![Output Log](screenshots/successlog.png)
+> The output panel displays the complete `LOG_STATS` and `LOG_SUCCESS` output streamed from the OpenModelica executable, including timing breakdowns and solver statistics.
+
+---
+
+### 7. About Dialog (Ctrl+I)
+![About Dialog](screenshots/about.png)
+> The About dialog, accessible via the toolbar or the `Ctrl+I` shortcut, shows the application name, purpose, and author.
 ---
 
 ## 🛠️ Technologies Used
